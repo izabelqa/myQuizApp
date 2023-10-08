@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private Button falseButton;
     private Button nextButton;
     private TextView questionText;
+    private Button restartButton;
 
     private int currentIndex = 0;
     private int correctAnswers = 0;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         falseButton = findViewById(R.id.falseB);
         nextButton = findViewById(R.id.nextB);
         questionText = findViewById(R.id.question_text);
+        restartButton = findViewById(R.id.restartB);
+        restartButton.setVisibility(View.GONE);
 
         questions = new Question[]{
                 new Question(R.string.quest1, true),
@@ -66,6 +69,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        restartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentIndex = 0;
+                correctAnswers = 0;
+                displayQuestion();
+                trueButton.setEnabled(true);
+                falseButton.setEnabled(true);
+                nextButton.setEnabled(true);
+                restartButton.setVisibility(View.GONE);
+            }
+        });
 
     }
     private void checkAnswer(boolean userAnswer) {
@@ -85,7 +100,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private void displayResult() {
-
+            String resultMessage;
+            if (correctAnswers >= 3) {
+                resultMessage = "Gratulacje! Masz " + correctAnswers + " poprawnych odpowiedzi";
+            } else {
+                resultMessage = "Spróbuj jeszcze raz! Masz tylko " + correctAnswers + " poprawne odpowiedzi";
+            }
+            questionText.setText(resultMessage);
+            restartButton.setVisibility(View.VISIBLE);
         }
 
     }

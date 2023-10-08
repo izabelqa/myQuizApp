@@ -3,6 +3,7 @@
     <string name="button_true">PRAWDA</string>
     <string name="button_false">FAŁSZ</string>
     <string name="button_next">NASTĘPNE</string>
+    <string name="button_restart">JESZCZE RAZ</string>
 
     <string name="quest1">Sowy są ptakami drapieżnymi, które polują nocą</string>
     <string name="quest2">Rekin to ssak morski, który oddycha za pomocą skrzeli.</string>
