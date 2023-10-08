@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Quiz</string>
+    <string name="button_true">PRAWDA</string>
+    <string name="button_false">FAŁSZ</string>
+    <string name="button_next">NASTĘPNE</string>
+
+    <string name="quest1">Sowy są ptakami drapieżnymi, które polują nocą</string>
+    <string name="quest2">Rekin to ssak morski, który oddycha za pomocą skrzeli.</string>
+    <string name="quest3">Krokodyle to gady, które żyją głównie w słonych wodach.</string>
+    <string name="quest4">Wieloryby to ssaki, które żyją na lądzie i nurkują pod wodę w poszukiwaniu pożywienia</string>
+    <string name="quest5">Pająki są bezkręgowcami i nie mają żadnych nóg</string>
+    <string name="correct_answer">Poprawna odpowiedź!</string>
+    <string name="incorrect_answer">Błędna odpowiedź.</string>
+
+</resources>
