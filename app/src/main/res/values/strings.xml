@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Quiz</string>
+    <string name="app_name">QUIZ</string>
     <string name="button_true">PRAWDA</string>
     <string name="button_false">FAŁSZ</string>
     <string name="button_next">NASTĘPNE</string>

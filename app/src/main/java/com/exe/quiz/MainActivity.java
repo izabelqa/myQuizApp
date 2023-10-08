@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private Button falseButton;
     private Button nextButton;
     private TextView questionText;
+    private TextView titleText;
     private Button restartButton;
 
     private int currentIndex = 0;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        titleText = findViewById(R.id.title_text);
         trueButton = findViewById(R.id.trueB);
         falseButton = findViewById(R.id.falseB);
         nextButton = findViewById(R.id.nextB);
