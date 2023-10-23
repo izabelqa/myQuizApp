@@ -1,14 +1,21 @@
 package com.exe.quiz;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static android.util.Log.d;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 public class MainActivity extends AppCompatActivity {
+
 
     private Button trueButton;
     private Button falseButton;
@@ -20,11 +27,30 @@ public class MainActivity extends AppCompatActivity {
     private int currentIndex = 0;
     private int correctAnswers = 0;
     private Question[] questions;
+    private static final String QUIZ_TAG = "MyActivity";
+    private static final String KEY_CURRENT_INDEX = "currentIndex";
+    public static final String KEY_EXTRA_ANSWER = "com.exe.quiz.correctAnswer";
+    private static final int REQUEST_CODE_PROMPT = 0;
 
+    private boolean answerWasShown = false;
+    boolean correctAnswer;
+    private Button hintButton;
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        d(QUIZ_TAG, "wywołana metoda: onSaveInstanceState");
+        outState.putInt(KEY_CURRENT_INDEX, currentIndex);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        d(QUIZ_TAG, "wywołana metoda: onCreate");
+
+        if (savedInstanceState != null){
+            currentIndex = savedInstanceState.getInt(KEY_CURRENT_INDEX);
+        }
 
         titleText = findViewById(R.id.title_text);
         trueButton = findViewById(R.id.trueB);
@@ -33,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         questionText = findViewById(R.id.question_text);
         restartButton = findViewById(R.id.restartB);
         restartButton.setVisibility(View.GONE);
+        hintButton = findViewById(R.id.hintButton);
 
         questions = new Question[]{
                 new Question(R.string.quest1, true),
@@ -43,10 +70,12 @@ public class MainActivity extends AppCompatActivity {
         };
 
         displayQuestion();
+
         trueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 checkAnswer(true);
+                disableAnswerButtons();
             }
         });
 
@@ -54,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkAnswer(false);
+                disableAnswerButtons();
             }
         });
 
@@ -61,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 currentIndex++;
+                answerWasShown = false;
                 if (currentIndex < questions.length) {
                     displayQuestion();
                 } else {
@@ -84,20 +115,48 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        hintButton.setOnClickListener((v) -> {
+            Intent intent = new Intent(MainActivity.this, PromptActivity.class);
+            correctAnswer = questions[currentIndex].isTrueAnswer();
+            intent.putExtra(KEY_EXTRA_ANSWER, correctAnswer);
+            resultLauncher.launch(intent);
+        });
+    }
+
+    private final ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    Intent data = result.getData();
+                    if (data != null) {
+                        answerWasShown = data.getBooleanExtra(PromptActivity.KEY_EXTRA_ANSWER_SHOWN, false);
+                        checkAnswer(true);
+                    }
+                }
+            }
+    );
+    private void disableAnswerButtons (){
+        trueButton.setEnabled(false);
+        falseButton.setEnabled(false);
     }
     private void checkAnswer(boolean userAnswer) {
         boolean correctAnswer = questions[currentIndex].isTrueAnswer();
         int resultMessageId = 0;
-        if (userAnswer == correctAnswer) {
-            correctAnswers++;
-            resultMessageId = R.string.correct_answer;
-        } else {
-            resultMessageId = R.string.incorrect_answer;
+        if (answerWasShown) resultMessageId = R.string.answer_was_shown;
+        else {
+            if (userAnswer == correctAnswer) {
+                correctAnswers++;
+                resultMessageId = R.string.correct_answer;
+            } else {
+                resultMessageId = R.string.incorrect_answer;
+            }
+            Toast.makeText(this, resultMessageId, Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, resultMessageId, Toast.LENGTH_SHORT).show();
     }
 
     private void displayQuestion() {
+            trueButton.setEnabled(true);
+            falseButton.setEnabled(true);
             questionText.setText(questions[currentIndex].getQuestionId());
         }
 
@@ -112,4 +171,33 @@ public class MainActivity extends AppCompatActivity {
             restartButton.setVisibility(View.VISIBLE);
         }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        d(QUIZ_TAG,"wywołana metoda: onStart");
+
     }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        d(QUIZ_TAG,"wywołana metoda: onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        d(QUIZ_TAG,"wywołana metoda: onDestroy");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        d(QUIZ_TAG,"wywołana metoda: onPause");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        d(QUIZ_TAG,"wywołana metoda: onResume");
+    }
+}

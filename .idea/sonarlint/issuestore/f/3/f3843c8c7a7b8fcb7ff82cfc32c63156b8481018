@@ -1,7 +1,26 @@
 
 J
-java:S1604("(Make this anonymous inner class a lambda(Üà¨¯üÿÿÿÿ8ÕÆ‡Ù°1
+java:S1604T"(Make this anonymous inner class a lambda(Üà¨¯üÿÿÿÿ8ôêğËµ1
 E
-java:S1604/"(Make this anonymous inner class a lambda(éäó‚8ÕÆ‡Ù°1
+java:S1604\"(Make this anonymous inner class a lambda(éäó‚8„ëğËµ1
 J
-java:S16046"(Make this anonymous inner class a lambda(ÈŒèâüÿÿÿÿ8ÕÆ‡Ù°1
+java:S1604d"(Make this anonymous inner class a lambda(ÈŒèâüÿÿÿÿ8„ëğËµ1
+J
+java:S1604s"(Make this anonymous inner class a lambda(èÔæŸüÿÿÿÿ8„ëğËµ1
+v
+java:S1450$"YRemove the "hintButton" field and declare it as a local variable in the relevant methods.(Š¡˜Æ8¥»ßËµ1
+u
+java:S1450"XRemove the "titleText" field and declare it as a local variable in the relevant methods.(ŒÅ¨Ö8¥»ßËµ1
+]	java:S125"<This block of commented-out lines of code should be removed.(ÕõÓ–şÿÿÿÿ8®ñ™Ìµ1
+f
+java:S1874'"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(¹Î¾8®ÖğËµ1
+R
+java:S1611€"/Remove the parentheses around the "v" parameter(œşóÊøÿÿÿÿ8Ä»ßËµ1
+\
+java:S1874„">Remove this use of "startActivityForResult"; it is deprecated.(îü‰”8£‰Ìµ1
+f
+java:S1854"CRemove this useless assignment to local variable "resultMessageId".(­ê¦¯şÿÿÿÿ8¢íğËµ1
+^
+java:S1117"ARename "correctAnswer" which hides the field declared at line 35.(œ†­8¢íğËµ1
+J
+java:S1068"-Remove this unused "titleText" private field.(ŒÅ¨Ö8Ô»ßËµ1

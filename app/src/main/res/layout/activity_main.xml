@@ -42,6 +42,13 @@
             android:text="@string/button_false"
             style="?android:attr/buttonBarButtonStyle" />
 
+        <Button
+            android:id="@+id/hintButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hint"
+            style="?android:attr/buttonBarButtonStyle" />
+
     </LinearLayout>
 
     <Button
